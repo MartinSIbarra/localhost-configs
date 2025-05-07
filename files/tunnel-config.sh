@@ -6,7 +6,7 @@ echo "🔧 > Configurando Ngrok service"
         NGROK_START_SCRIPT=$HOME/bin/$(basename $REMOTE_NGROK_START_SCRIPT)
         echo "NGROK_START_SCRIPT: $NGROK_START_SCRIPT"
         echo "REMOTE_NGROK_START_SCRIPT: $REMOTE_NGROK_START_SCRIPT"
-        curl -fL -C - -o $NGROK_START_SCRIPT $REMOTE_NEGROK_START_SCRIPT || { echo "Error descargando $REMOTE_NGROK_START_SCRIPT"; exit 1; }
+        curl -sSL -o $NGROK_START_SCRIPT $REMOTE_NEGROK_START_SCRIPT || { echo "Error descargando $REMOTE_NGROK_START_SCRIPT"; exit 1; }
         chmod +x $NGROK_START_SCRIPT
         chown $USER:$USER $NGROK_START_SCRIPT
         echo "🔎📄 >>> BOF: $NGROK_START_SCRIPT"
@@ -19,7 +19,7 @@ echo "🔧 > Configurando Ngrok service"
         TEMP_FILE=$(mktemp)
         echo "NEGROK_START_SERVICE: $NEGROK_START_SERVICE"
         echo "REMOTE_NGROK_START_SERVICE: $REMOTE_NGROK_START_SERVICE"
-        sudo curl -fL -C - -o $TEMP_FILE $REMOTE_NGROK_START_SERVICE || { echo "Error descargando $REMOTE_NGROK_START_SERVICE"; exit 1; }
+        sudo curl -sSL -o $TEMP_FILE $REMOTE_NGROK_START_SERVICE || { echo "Error descargando $REMOTE_NGROK_START_SERVICE"; exit 1; }
         envsubst < $TEMP_FILE > $NEGROK_START_SERVICE
         rm -f $TEMP_FILE
         sudo ln -s $NEGROK_START_SERVICE /etc/systemd/system/
@@ -44,7 +44,7 @@ echo "🔧 > Configurando proxy de Ngrok usando Nginx..."
         TEMP_FILE=$(mktemp)
         echo "NGROK_PROXY_CONFIG: $NGROK_PROXY_CONFIG"
         echo "REMOTE_NGROK_PROXY_CONFIG: $REMOTE_NGROK_PROXY_CONFIG"
-        curl -fL -C - -o $TEMP_FILE $REMOTE_NGROK_PROXY_CONFIG || { echo "Error descargando $REMOTE_NGROK_PROXY_CONFIG"; exit 1; }
+        curl -sSL -o $TEMP_FILE $REMOTE_NGROK_PROXY_CONFIG || { echo "Error descargando $REMOTE_NGROK_PROXY_CONFIG"; exit 1; }
         envsubst < $TEMP_FILE > $NGROK_PROXY_CONFIG
         rm -f $TEMP_FILE
         echo "🔎📄 >>> BOF: $NGROK_PROXY_CONFIG"
