@@ -1,4 +1,4 @@
-#!/bin/bash"
+#!/bin/bash
 mkdir -p $HOME/logs
-ngrok config add-authtoken $NGROK_AUTH_TOKEN
-ngrok http $NGROK_TUNNEL_PORT --url=$NGROK_TUNNEL_URL --log=$NGROK_LOG
+NGROK_AUTH_TOKEN=$(cat $NGROK_AUTH_TOKEN_PATH)
+ngrok http $NGROK_TUNNEL_PORT --url=$NGROK_TUNNEL_URL --authtoken=$NGROK_AUTH_TOKEN --log=$NGROK_LOG
