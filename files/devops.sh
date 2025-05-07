@@ -1,10 +1,6 @@
 #!/bin/bash
 export REMOTE_REPO="https://raw.githubusercontent.com/MartinSIbarra/localhost-configs/refs/heads/main"
 
-BASICS_SCRIPT=$REMOTE_REPO/files/basics.sh
-echo "BASICS_SCRIPT: $BASICS_SCRIPT"
-curl -sSL $BASICS_SCRIPT | bash
-
 echo "🔧 > Agregando variables de entorno para DevOps..."
     REMOTE_DEVOPS_VARS=$REMOTE_REPO/files/devops-vars
     DEVOPS_VARS=$HOME/.config/$(basename $REMOTE_DEVOPS_VARS)

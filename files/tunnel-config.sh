@@ -45,7 +45,7 @@ echo "🔧 > Configurando proxy de Ngrok usando Nginx..."
         echo "NGROK_PROXY_CONFIG: $NGROK_PROXY_CONFIG"
         echo "REMOTE_NGROK_PROXY_CONFIG: $REMOTE_NGROK_PROXY_CONFIG"
         curl -sSL -o $TEMP_FILE $REMOTE_NGROK_PROXY_CONFIG || { echo "Error descargando $REMOTE_NGROK_PROXY_CONFIG"; exit 1; }
-        envsubst < $TEMP_FILE > $NGROK_PROXY_CONFIG
+        envsubst '${PROD_SERVER} ${UAT_SERVER} ${DEVOPS_SERVER}' < $TEMP_FILE > $NGROK_PROXY_CONFIG
         rm -f $TEMP_FILE
         echo "🔎📄 >>> BOF: $NGROK_PROXY_CONFIG"
         cat $NGROK_PROXY_CONFIG
