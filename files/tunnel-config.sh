@@ -19,7 +19,7 @@ echo "🔧 > Configurando Ngrok service"
         TEMP_FILE=$(mktemp)
         echo "NEGROK_START_SERVICE: $NEGROK_START_SERVICE"
         echo "REMOTE_NGROK_START_SERVICE: $REMOTE_NGROK_START_SERVICE"
-        sudo curl -sSL -o $TEMP_FILE $REMOTE_NGROK_START_SERVICE || { echo "Error descargando $REMOTE_NGROK_START_SERVICE"; exit 1; }
+        curl -sSL -o $TEMP_FILE $REMOTE_NGROK_START_SERVICE || { echo "Error descargando $REMOTE_NGROK_START_SERVICE"; exit 1; }
         envsubst < $TEMP_FILE > $NEGROK_START_SERVICE
         rm -f $TEMP_FILE
         sudo ln -s $NEGROK_START_SERVICE /etc/systemd/system/
