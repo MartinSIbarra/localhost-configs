@@ -6,7 +6,7 @@ echo "🔧 > Configurando Ngrok service"
         NGROK_START_SCRIPT=$HOME/bin/$(basename $REMOTE_NGROK_START_SCRIPT)
         echo "NGROK_START_SCRIPT: $NGROK_START_SCRIPT"
         echo "REMOTE_NGROK_START_SCRIPT: $REMOTE_NGROK_START_SCRIPT"
-        curl -sSL -o $NGROK_START_SCRIPT $REMOTE_NEGROK_START_SCRIPT || { echo "Error descargando $REMOTE_NGROK_START_SCRIPT"; exit 1; }
+        curl -sSL -o $NGROK_START_SCRIPT $REMOTE_NGROK_START_SCRIPT || { echo "Error descargando $REMOTE_NGROK_START_SCRIPT"; exit 1; }
         chmod +x $NGROK_START_SCRIPT
         chown $USER:$USER $NGROK_START_SCRIPT
         echo "🔎📄 >>> BOF: $NGROK_START_SCRIPT"
