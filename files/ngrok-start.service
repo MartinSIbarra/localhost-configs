@@ -1,0 +1,13 @@
+[Unit]
+Description=Start ngrok tunnel
+After=network.target
+
+[Service]
+Type=simple
+User=${USER}
+ExecStart=${NGROK_START_SCRIPT_NAME}
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
