@@ -1,6 +1,24 @@
 #!/bin/bash
 export REMOTE_REPO="https://raw.githubusercontent.com/MartinSIbarra/localhost-configs/refs/heads/main"
 
+exec_until_done() {
+  local n=0
+  local max=10
+  local delay=3
+
+  echo "$@"
+  until "$@"; do
+    n=$((n+1))  
+    if [ $n -ge $max ]; then
+      echo "Comando falló tras $n intentos: $*"
+      return 1
+    fi
+    echo "Intento $n fallido. Reintentando en $delay segundos..."
+    sleep $delay
+  done
+}
+export -f exec_until_done
+
 echo "🔧 > Actualizando el Package Manager..."
     sudo apt-get update
     sudo apt-get upgrade -y
@@ -31,7 +49,7 @@ echo "🔧 > Agregando variables de entorno..."
     BASICS_VARS=$HOME/.config/$(basename $REMOTE_BASICS_VARS)
     echo "BASICS_VARS: $BASICS_VARS"
     echo "REMOTE_BASICS_VARS: $REMOTE_BASICS_VARS"
-    curl -sSL -o $BASICS_VARS $REMOTE_BASICS_VARS || { echo "Error descargando $REMOTE_BASICS_VARS"; exit 1; }
+    exec_until_done curl -sSL -o $BASICS_VARS $REMOTE_BASICS_VARS || { echo "Error descargando $REMOTE_BASICS_VARS"; exit 1; }
     echo "set -a && source $BASICS_VARS && set +a" >> $HOME/.config/customs.sh
     set -a && source $BASICS_VARS && set +a
 echo "✅ > Variables de entorno agregadas."
@@ -41,7 +59,7 @@ echo "🔧 > Agregando aliases customs..."
     ALIAS_SCRIPT="$HOME/.config/$(basename $REMOTE_ALIAS_SCRIPT)"
     echo "ALIAS_SCRIPT: $ALIAS_SCRIPT"
     echo "REMOTE_ALIAS_SCRIPT: $REMOTE_ALIAS_SCRIPT"
-    curl -sSL -o $ALIAS_SCRIPT $REMOTE_ALIAS_SCRIPT || { echo "Error descargando $REMOTE_ALIAS_SCRIPT"; exit 1; }
+    exec_until_done curl -sSL -o $ALIAS_SCRIPT $REMOTE_ALIAS_SCRIPT || { echo "Error descargando $REMOTE_ALIAS_SCRIPT"; exit 1; }
     chmod +x $ALIAS_SCRIPT
     chown $USER:$USER $ALIAS_SCRIPT
     echo "source $ALIAS_SCRIPT" >> $HOME/.config/customs.sh
@@ -55,7 +73,7 @@ echo "🔧 > Configurando locales es_AR.UTF-8 y lenguaje en_US.UTF-8..."
     sudo locale-gen
     REMOTE_LOCALE_VARS=$REMOTE_REPO/files/locale-vars
     echo "REMOTE_LOCALE_VARS: $REMOTE_LOCALE_VARS"
-    sudo curl -sSL -o /etc/default/locale $REMOTE_LOCALE_VARS || { echo "Error descargando $REMOTE_LOCALE_VARS"; exit 1; }
+    exec_until_done sudo curl -sSL -o /etc/default/locale $REMOTE_LOCALE_VARS || { echo "Error descargando $REMOTE_LOCALE_VARS"; exit 1; }
     set -a && source /etc/default/locale && set +a
 echo "✅ > Locales configurados correctamente."
 
