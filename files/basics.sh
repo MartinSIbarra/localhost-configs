@@ -1,5 +1,6 @@
 #!/bin/bash
-$REMOTE_REPO="https://raw.githubusercontent.com/MartinSIbarra/localhost-configs/main"
+export REMOTE_REPO="https://raw.githubusercontent.com/MartinSIbarra/localhost-configs/refs/heads/main"
+
 echo "🔧 > Actualizando el Package Manager..."
     sudo apt-get update
     sudo apt-get upgrade -y

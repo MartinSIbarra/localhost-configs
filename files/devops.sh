@@ -1,5 +1,5 @@
 #!/bin/bash
-REMOTE_REPO=https://raw.githubusercontent.com/MartinSIbarra/localhost-configs/main
+export REMOTE_REPO="https://raw.githubusercontent.com/MartinSIbarra/localhost-configs/refs/heads/main"
 
 BASICS_SCRIPT=$REMOTE_REPO/files/basics.sh
 curl -sL $BASICS_SCRIPT | bash

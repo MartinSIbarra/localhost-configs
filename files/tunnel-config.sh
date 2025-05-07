@@ -1,6 +1,5 @@
 #!/bin/bash
 # Variables para obtener los archivos del repositorio remoto
-REMOTE_REPO="https://raw.githubusercontent.com/MartinSIbarra/localhost-configs/main"
 echo "🔧 > Configurando Ngrok service"
     echo "🌍 > Recuperando script de arranque para Ngrok..."
         REMOTE_NGROK_START_SCRIPT=$REMOTE_REPO/files/ngrok-start.sh
