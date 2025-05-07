@@ -29,6 +29,8 @@ echo "🔧 > Agregando variables de entorno..."
 # Variables para obtener los archivos del repositorio remoto
     REMOTE_BASICS_VARS=$REMOTE_REPO/files/basics-vars
     BASICS_VARS=$HOME/.config/$(basename $REMOTE_BASICS_VARS)
+    echo "BASICS_VARS: $BASICS_VARS"
+    echo "REMOTE_BASICS_VARS: $REMOTE_BASICS_VARS"
     curl -fL -C - -o $BASICS_VARS $REMOTE_BASICS_VARS || { echo "Error descargando $REMOTE_BASICS_VARS"; exit 1; }
     echo "set -a && source $BASICS_VARS && set +a" >> $HOME/.config/customs.sh
     set -a && source $BASICS_VARS && set +a
@@ -37,6 +39,8 @@ echo "✅ > Variables de entorno agregadas."
 echo "🔧 > Agregando aliases customs..."
     REMOTE_ALIAS_SCRIPT=$REMOTE_REPO/files/aliases.sh
     ALIAS_SCRIPT="$HOME/.config/$(basename $REMOTE_ALIAS_SCRIPT)"
+    echo "ALIAS_SCRIPT: $ALIAS_SCRIPT"
+    echo "REMOTE_ALIAS_SCRIPT: $REMOTE_ALIAS_SCRIPT"
     curl -fL -C - -o $ALIAS_SCRIPT $REMOTE_ALIAS_SCRIPT || { echo "Error descargando $REMOTE_ALIAS_SCRIPT"; exit 1; }
     chmod +x $ALIAS_SCRIPT
     chown $USER:$USER $ALIAS_SCRIPT
@@ -50,6 +54,7 @@ echo "🔧 > Configurando locales es_AR.UTF-8 y lenguaje en_US.UTF-8..."
     fi
     sudo locale-gen
     REMOTE_LOCALE_VARS=$REMOTE_REPO/files/locale-vars
+    echo "REMOTE_LOCALE_VARS: $REMOTE_LOCALE_VARS"
     sudo curl -fL -C - -o /etc/default/locale $REMOTE_LOCALE_VARS || { echo "Error descargando $REMOTE_LOCALE_VARS"; exit 1; }
     set -a && source /etc/default/locale && set +a
 echo "✅ > Locales configurados correctamente."
