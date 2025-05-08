@@ -28,11 +28,9 @@ echo "🔧 > Agregando variables de entorno para DevOps..."
     
     [[ -r "$HOME/.config/ngrok-auth-token" ]] && NGROK_AUTH_TOKEN=$(head -n 1 $HOME/.config/ngrok-auth-token)
     [[ -n "$NGROK_AUTH_TOKEN" ]] && sed -i "s/XXXngrok-auth-tokenXXX/$NGROK_AUTH_TOKEN/g" $DEVOPS_VARS
-    rm -f $HOME/.config/ngrok-auth-token
     
     [[ -r "$HOME/.config/ngrok-tunnel-url" ]] && NGROK_TUNNEL_URL=$(head -n 1 $HOME/.config/ngrok-tunnel-url)
     [[ -n "$NGROK_TUNNEL_URL" ]] && sed -i "s/XXXngrok-tunnel-urlXXX/$NGROK_TUNNEL_URL/g" $DEVOPS_VARS
-    rm -f $HOME/.config/ngrok-tunnel-url
     
     echo "set -a && source $DEVOPS_VARS && set +a" >> $HOME/.config/customs.sh
     set -a && source $DEVOPS_VARS && set +a
