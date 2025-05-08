@@ -1,5 +1,5 @@
 #!/bin/bash
-export REMOTE_REPO="https://raw.githubusercontent.com/MartinSIbarra/localhost-configs/refs/heads/main"
+export REMOTE_REPO="https://raw.githubusercontent.com/MartinSIbarra/localhost-configs/refs/heads/main/files"
 
 exec_until_done() {
   local n=0
@@ -45,7 +45,7 @@ echo "✅ > Carpetas de configuraciones, logs y ejecutables agregadas."
 
 echo "🔧 > Agregando variables de entorno..."
 # Variables para obtener los archivos del repositorio remoto
-    REMOTE_BASICS_VARS=$REMOTE_REPO/files/basics-vars
+    REMOTE_BASICS_VARS=$REMOTE_REPO/basics.env
     BASICS_VARS=$HOME/.config/$(basename $REMOTE_BASICS_VARS)
     echo "BASICS_VARS: $BASICS_VARS"
     echo "REMOTE_BASICS_VARS: $REMOTE_BASICS_VARS"
@@ -55,7 +55,7 @@ echo "🔧 > Agregando variables de entorno..."
 echo "✅ > Variables de entorno agregadas."
 
 echo "🔧 > Agregando aliases customs..."
-    REMOTE_ALIAS_SCRIPT=$REMOTE_REPO/files/aliases.sh
+    REMOTE_ALIAS_SCRIPT=$REMOTE_REPO/aliases.sh
     ALIAS_SCRIPT="$HOME/.config/$(basename $REMOTE_ALIAS_SCRIPT)"
     echo "ALIAS_SCRIPT: $ALIAS_SCRIPT"
     echo "REMOTE_ALIAS_SCRIPT: $REMOTE_ALIAS_SCRIPT"
@@ -71,7 +71,7 @@ echo "🔧 > Configurando locales es_AR.UTF-8 y lenguaje en_US.UTF-8..."
         echo "es_AR.UTF-8 UTF-8" | sudo tee -a /etc/locale.gen
     fi
     sudo locale-gen
-    REMOTE_LOCALE_VARS=$REMOTE_REPO/files/locale-vars
+    REMOTE_LOCALE_VARS=$REMOTE_REPO/locale.env
     echo "REMOTE_LOCALE_VARS: $REMOTE_LOCALE_VARS"
     exec_until_done sudo curl -sSfL -o /etc/default/locale $REMOTE_LOCALE_VARS || { echo "Error descargando $REMOTE_LOCALE_VARS"; exit 1; }
     set -a && source /etc/default/locale && set +a

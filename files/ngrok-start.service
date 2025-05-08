@@ -5,7 +5,8 @@ After=network.target
 [Service]
 Type=simple
 User=${USER}
-ExecStart=${NGROK_START_SCRIPT_NAME}
+EnvironmentFile=${HOME}/.config/devops.env
+ExecStart=${HOME}/bin/${NGROK_START_SCRIPT_NAME}
 Restart=on-failure
 RestartSec=5
 

@@ -2,7 +2,7 @@
 # Variables para obtener los archivos del repositorio remoto
 echo "🔧 > Configurando Ngrok service"
     echo "🌍 > Recuperando script de arranque para Ngrok..."
-        REMOTE_NGROK_START_SCRIPT=$REMOTE_REPO/files/ngrok-start.sh
+        REMOTE_NGROK_START_SCRIPT=$REMOTE_REPO/ngrok-start.sh
         NGROK_START_SCRIPT=$HOME/bin/$(basename $REMOTE_NGROK_START_SCRIPT)
         echo "NGROK_START_SCRIPT: $NGROK_START_SCRIPT"
         echo "REMOTE_NGROK_START_SCRIPT: $REMOTE_NGROK_START_SCRIPT"
@@ -14,7 +14,7 @@ echo "🔧 > Configurando Ngrok service"
         echo "🔎📄 >>> EOF $NGROK_START_SCRIPT"
 
     echo "🌍 > Recuperando servicio systemd para Ngrok..."
-        REMOTE_NGROK_START_SERVICE=$REMOTE_REPO/files/ngrok-start.service
+        REMOTE_NGROK_START_SERVICE=$REMOTE_REPO/ngrok-start.service
         NEGROK_START_SERVICE=$HOME/.config/$(basename $REMOTE_NGROK_START_SERVICE)
         TEMP_FILE=$(mktemp)
         echo "NEGROK_START_SERVICE: $NEGROK_START_SERVICE"
@@ -39,7 +39,7 @@ echo "✅ > Servicio de Ngrok listo."
 
 echo "🔧 > Configurando proxy de Ngrok usando Nginx..."
     echo "🌍 > Recuperando configuración para el proxy Nginx..."
-        REMOTE_NGROK_PROXY_CONFIG=$REMOTE_REPO/files/ngrok-proxy.conf
+        REMOTE_NGROK_PROXY_CONFIG=$REMOTE_REPO/ngrok-proxy.conf
         NGROK_PROXY_CONFIG=$HOME/.config/$(basename $REMOTE_NGROK_PROXY_CONFIG)
         TEMP_FILE=$(mktemp)
         echo "NGROK_PROXY_CONFIG: $NGROK_PROXY_CONFIG"
