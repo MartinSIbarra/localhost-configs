@@ -4,9 +4,11 @@ echo "🔧 > Configurando Ngrok service"
     echo "🌍 > Recuperando script de arranque para Ngrok..."
         REMOTE_NGROK_START_SCRIPT=$REMOTE_REPO/ngrok-start.sh
         NGROK_START_SCRIPT=$HOME/bin/$(basename $REMOTE_NGROK_START_SCRIPT)
+        TEMP_FILE=$(mktemp)
         echo "NGROK_START_SCRIPT: $NGROK_START_SCRIPT"
         echo "REMOTE_NGROK_START_SCRIPT: $REMOTE_NGROK_START_SCRIPT"
-        exec_until_done curl -sSfL -o $NGROK_START_SCRIPT $REMOTE_NGROK_START_SCRIPT || { echo "Error descargando $REMOTE_NGROK_START_SCRIPT"; exit 1; }
+        exec_until_done curl -sSfL -o $TEMP_FILE $REMOTE_NGROK_START_SCRIPT || { echo "Error descargando $REMOTE_NGROK_START_SCRIPT"; exit 1; }
+        envsubst < $TEMP_FILE > $NGROK_START_SCRIPT
         chmod +x $NGROK_START_SCRIPT
         chown $USER:$USER $NGROK_START_SCRIPT
         echo "🔎📄 >>> BOF: $NGROK_START_SCRIPT"
