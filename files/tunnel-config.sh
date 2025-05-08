@@ -9,6 +9,7 @@ echo "🔧 > Configurando Ngrok service"
         echo "REMOTE_NGROK_START_SCRIPT: $REMOTE_NGROK_START_SCRIPT"
         exec_until_done curl -sSfL -o $TEMP_FILE $REMOTE_NGROK_START_SCRIPT || { echo "Error descargando $REMOTE_NGROK_START_SCRIPT"; exit 1; }
         envsubst < $TEMP_FILE > $NGROK_START_SCRIPT
+        rm -f $TEMP_FILE
         chmod +x $NGROK_START_SCRIPT
         chown $USER:$USER $NGROK_START_SCRIPT
         echo "🔎📄 >>> BOF: $NGROK_START_SCRIPT"
@@ -30,10 +31,9 @@ echo "🔧 > Configurando Ngrok service"
         echo "🔎📄 >>> EOF: $NEGROK_START_SERVICE"
 
     echo "⚙️ > Iniciando el servicio systemd de Ngrok..."
-        sudo systemctl daemon-reload
         sudo systemctl stop ngrok-start.service || true 
-        sudo systemctl daemon-reexec
         sudo systemctl daemon-reload
+        sudo systemctl daemon-reexec
         sudo systemctl enable ngrok-start.service
         sudo systemctl start ngrok-start.service
         sudo systemctl status ngrok-start.service
