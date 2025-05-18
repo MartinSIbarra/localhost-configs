@@ -1,24 +1,4 @@
 #!/bin/bash
-export REMOTE_REPO="https://raw.githubusercontent.com/MartinSIbarra/localhost-configs/refs/heads/main/files"
-
-exec_until_done() {
-  local n=0
-  local max=10
-  local delay=3
-
-  echo "$@"
-  until "$@"; do
-    n=$((n+1))  
-    if [ $n -ge $max ]; then
-      echo "Comando falló tras $n intentos: $*"
-      return 1
-    fi
-    echo "Intento $n fallido. Reintentando en $delay segundos..."
-    sleep $delay
-  done
-}
-export -f exec_until_done
-
 echo "🔧 > Actualizando el Package Manager..."
     sudo apt-get update
     sudo apt-get upgrade -y
