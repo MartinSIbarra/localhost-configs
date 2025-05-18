@@ -1,5 +1,5 @@
 #!/bin/bash
-export REMOTE_REPO="https://raw.githubusercontent.com/MartinSIbarra/localhost-configs/refs/heads/main/files"
+#export REMOTE_REPO="https://raw.githubusercontent.com/MartinSIbarra/localhost-configs/refs/heads/main/files"
 
 exec_until_done() {
   local n=0
