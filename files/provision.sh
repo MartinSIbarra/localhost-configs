@@ -86,4 +86,4 @@ source_remote_script() {
 
 source_remote_script basics.sh
 
-[[ $server_type == "devops"]] && source_remote_script devops.sh
+[[ $server_type == "devops" ]] && source_remote_script devops.sh
