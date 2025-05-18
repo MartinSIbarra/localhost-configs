@@ -58,7 +58,7 @@ export NGROK_TUNNEL_URL=$ngrok_tunnel_url
 exec_until_done() {
   local n=0
   local max=10
-  local delay=3
+  local delay=5
 
   echo "$@"
   until "$@"; do
